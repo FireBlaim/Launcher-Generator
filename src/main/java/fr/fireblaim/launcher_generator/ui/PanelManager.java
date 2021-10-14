@@ -2,9 +2,7 @@ package fr.fireblaim.launcher_generator.ui;
 
 import com.goxr3plus.fxborderlessscene.borderless.BorderlessScene;
 import fr.fireblaim.launcher_generator.App;
-import fr.fireblaim.launcher_generator.ui.panel.BlankPanel;
 import fr.fireblaim.launcher_generator.ui.panel.Panel;
-import fr.fireblaim.launcher_generator.ui.panel.TestPanel;
 import fr.fireblaim.launcher_generator.ui.panel.other.TopBar;
 import javafx.geometry.VPos;
 import javafx.scene.layout.GridPane;
