@@ -1,17 +1,22 @@
 package fr.fireblaim.launcher_generator.ui;
 
-import com.goxr3plus.fxborderlessscene.borderless.BorderlessScene;
 import fr.fireblaim.launcher_generator.App;
 import fr.fireblaim.launcher_generator.ui.panel.Panel;
 import fr.fireblaim.launcher_generator.ui.panel.other.TopBar;
+import fr.fireblaim.launcher_generator.ui.panel.panels.HomePanel;
 import javafx.geometry.VPos;
+import javafx.scene.Scene;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.RowConstraints;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
+import java.awt.*;
+
 public class PanelManager {
+
+    private final Point dragDelta = new Point();
 
     private final App app;
     private final Stage stage;
@@ -31,14 +36,26 @@ public class PanelManager {
         stage.setTitle("Launcher Generator v" + App.VERSION);
         stage.setWidth(854);
         stage.setHeight(480);
+        stage.initStyle(StageStyle.UNDECORATED);
         stage.centerOnScreen();
 
         TopBar topBar = new TopBar();
-        BorderlessScene scene = new BorderlessScene(stage, StageStyle.UNDECORATED, layout);
+        topBar.init(this);
 
-        scene.setMoveControl(topBar.getLayout());
-        scene.setResizable(false);
-        scene.removeDefaultCSS();
+        Scene scene = new Scene(layout);
+
+        scene.setOnMousePressed(event -> {
+            if(topBar.getLayout().isPressed()) {
+                dragDelta.x = (int) (stage.getX() - event.getScreenX());
+                dragDelta.y = (int) (stage.getY() - event.getScreenY());
+            }
+        });
+        scene.setOnMouseDragged(event -> {
+            if(topBar.getLayout().isPressed()) {
+                stage.setX(event.getScreenX() + dragDelta.x);
+                stage.setY(event.getScreenY() + dragDelta.y);
+            }
+        });
 
         stage.setScene(scene);
 
@@ -46,13 +63,16 @@ public class PanelManager {
         topPaneConstraints.setValignment(VPos.TOP);
         topPaneConstraints.setMinHeight(35);
         topPaneConstraints.setMaxHeight(35);
-        layout.getRowConstraints().addAll(topPaneConstraints, new RowConstraints());
-        layout.add(topBar.getLayout(), 0, 0);
-        topBar.init(this);
 
-        layout.add(contentPane, 0, 1);
         GridPane.setHgrow(contentPane, Priority.ALWAYS);
         GridPane.setVgrow(contentPane, Priority.ALWAYS);
+        contentPane.setStyle("-fx-background-color: gray");
+
+        layout.getRowConstraints().addAll(topPaneConstraints, new RowConstraints());
+        layout.add(topBar.getLayout(), 0, 0);
+        layout.add(contentPane, 0, 1);
+
+        switchPanel(new HomePanel());
 
         stage.show();
     }
