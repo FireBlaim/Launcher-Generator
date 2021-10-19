@@ -33,15 +33,7 @@ public abstract class Panel implements IPanel {
 
     @Override
     public void onShow() {
-        layout.translateXProperty().set(panelManager.getStage().getScene().getWidth());
 
-        Timeline timeline = new Timeline();
-        KeyValue kv = new KeyValue(layout.translateXProperty(), 0, Interpolator.EASE_IN);
-        KeyFrame kf = new KeyFrame(Duration.seconds(0.5), kv);
-
-        timeline.getKeyFrames().add(kf);
-        timeline.setAutoReverse(true);
-        timeline.play();
     }
 
     @Override

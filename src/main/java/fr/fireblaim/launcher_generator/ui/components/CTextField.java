@@ -1,20 +1,17 @@
 package fr.fireblaim.launcher_generator.ui.components;
 
-import com.jfoenix.controls.JFXButton;
-import javafx.scene.Cursor;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Priority;
 import javafx.scene.text.Font;
 
-public class CButton extends JFXButton {
+public class CTextField extends TextField {
 
-    public CButton(String text) {
+    public CTextField() {
         GridPane.setHgrow(this, Priority.ALWAYS);
         GridPane.setVgrow(this, Priority.ALWAYS);
 
-        setText(text);
-        setStyle("-fx-padding: 0.7em 0.57em; -fx-text-fill: black; -fx-background-color: white; -fx-border-color: white;");
-        setCursor(Cursor.HAND);
+        setStyle("-fx-padding: 8px; -fx-text-fill: black; -fx-background-color: white; -fx-border-color: white;");
     }
 
     public void setSize(double width, double height) {

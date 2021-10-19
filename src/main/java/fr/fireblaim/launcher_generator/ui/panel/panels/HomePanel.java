@@ -28,7 +28,7 @@ public class HomePanel extends Panel {
         title.setFontSize(28D, true);
         layout.getChildren().add(title);
 
-        CLabel description = new CLabel("Grâce à ce logiciel vous allez pouvoir créer facilement votre launcher !");
+        CLabel description = new CLabel("Grâce à ce logiciel vous allez pouvoir créer facilement votre launcher sans coder !");
         GridPane.setHalignment(description, HPos.CENTER);
         GridPane.setValignment(description, VPos.CENTER);
         description.setWrapText(true);
@@ -71,6 +71,9 @@ public class HomePanel extends Panel {
         next.setTranslateY(-20D);
         next.setSize(120, 40);
         next.setFontSize(14D, false);
+        next.setOnMouseClicked(event -> {
+            panelManager.switchPanel(new PreparationPanel());
+        });
         layout.getChildren().add(next);
     }
 

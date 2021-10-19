@@ -97,4 +97,8 @@ public class PanelManager {
     public Stage getStage() {
         return stage;
     }
+
+    public GridPane getContentPane() {
+        return contentPane;
+    }
 }
